@@ -146,9 +146,10 @@ _couchDb.viewTraverser(options, onSuccess, onError);
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-```js
-_couchDb.bulk.post(records, onSuccess, onError);
-```
+&nbsp;
+    
+    _couchDb.bulk.post(records, onSuccess, onError);
+    
 
 #### Bulk update documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
@@ -157,9 +158,10 @@ Here each document in the array is expected to have the CouchDb internal propert
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-```js
-_couchDb.bulk.put(documents, onSuccess, onError);
-```
+&nbsp;
+    
+    _couchDb.bulk.put(documents, onSuccess, onError);
+    
 
 #### Bulk delete documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
@@ -168,9 +170,10 @@ Here each document in the array is expected to have the CouchDb internal propert
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-```js
-_couchDb.bulk.delete(documents, onSuccess, onError);
-```
+&nbsp;
+    
+    _couchDb.bulk.delete(documents, onSuccess, onError);
+    
 
 ### Mappers
 
@@ -267,6 +270,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2016-08-19   v1.0.5   Fix for weird GitHub Markdown syntax.
  * 2016-08-19   v1.0.4   Fixed typo.
  * 2016-08-19   v1.0.3   Added more docs.
  * 2016-08-19   v1.0.2   Added more docs and removed peerDependencies.
