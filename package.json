@@ -1,6 +1,6 @@
 {
   "name": "node-couch",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "CouchDb library for Node.Js",
   "scripts": {
     "compile": "grunt compile",

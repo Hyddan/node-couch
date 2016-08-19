@@ -147,7 +147,7 @@ _couchDb.viewTraverser(options, onSuccess, onError);
 * onError - Function. Will get an error message as argument.
 
 ```js
-_couchDb.bulk.post(documents, onSuccess, onError);
+_couchDb.bulk.post(records, onSuccess, onError);
 ```
 
 #### Bulk update documents
@@ -267,6 +267,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2016-08-19   v1.0.4   Fixed typo.
  * 2016-08-19   v1.0.3   Added more docs.
  * 2016-08-19   v1.0.2   Added more docs and removed peerDependencies.
  * 2016-06-13   v1.0.1   Fixed peerDependencies.
