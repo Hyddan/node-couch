@@ -1,6 +1,6 @@
 {
   "name": "node-couch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CouchDb library for Node.Js",
   "scripts": {
     "compile": "grunt compile",
@@ -29,8 +29,5 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "load-grunt-tasks": "^3.5.0"
-  },
-  "peerDependencies": {
-    "grunt": ">=0.4.0"
   }
 }

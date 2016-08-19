@@ -153,7 +153,7 @@ module.exports = function () {
 			return _self.viewTraverser(options, onSuccess, onError);
 		},
 		viewTraverser: function (options, onSuccess, onError) {
-			onError = onError &&  || function () {};
+			onError = onError || function () {};
 			
 			var query = function (limit, key, startKey, startKeyDocId) {
 						var _startKey;
