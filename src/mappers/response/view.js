@@ -8,7 +8,7 @@ module.exports = function () {
 		for (var row in viewResponse) {
 			if (!viewResponse.hasOwnProperty(row)) continue;
 
-			var value = viewResponse[row];
+			var value = viewResponse[row].value;
 
 			if (hideInternalIds) {
 				delete value._id;

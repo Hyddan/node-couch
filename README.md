@@ -270,6 +270,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2016-08-19   v1.0.6   Fixed view response mapper.
  * 2016-08-19   v1.0.5   Fix for weird GitHub Markdown syntax.
  * 2016-08-19   v1.0.4   Fixed typo.
  * 2016-08-19   v1.0.3   Added more docs.
