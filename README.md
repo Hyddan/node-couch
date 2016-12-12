@@ -146,10 +146,9 @@ _couchDb.viewTraverser(options, onSuccess, onError);
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-&nbsp;
-    
-    _couchDb.bulk.post(records, onSuccess, onError);
-    
+```js
+_couchDb.bulk.post(records, onSuccess, onError);
+```
 
 #### Bulk update documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
@@ -158,10 +157,9 @@ Here each document in the array is expected to have the CouchDb internal propert
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-&nbsp;
-    
-    _couchDb.bulk.put(documents, onSuccess, onError);
-    
+```js
+_couchDb.bulk.put(documents, onSuccess, onError);
+```
 
 #### Bulk delete documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
@@ -170,10 +168,9 @@ Here each document in the array is expected to have the CouchDb internal propert
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
-&nbsp;
-    
-    _couchDb.bulk.delete(documents, onSuccess, onError);
-    
+```js
+_couchDb.bulk.delete(documents, onSuccess, onError);
+```
 
 ### Mappers
 
