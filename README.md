@@ -109,9 +109,9 @@ Will transform each document in a view (unless limits/paging are used).
 * action - Object. The action object must have a property called 'apply' that is of type Function.
   * apply - Function to apply to each document. If the function returns the (case senstitive) string `Delete` then the document will be deleted.
 * onSuccess - Function. Will get an object with below properties as argument.
-    * data - Array of documents.
-    * processedDocuments - Number of processed documents.
-    * processedPages - Number of processed pages.
+  * data - Array of documents.
+  * processedDocuments - Number of processed documents.
+  * processedPages - Number of processed pages.
 * onError - Function. Will get an error message as argument.
 
 ```js
@@ -130,9 +130,9 @@ Will traverse each document in a view (unless limits/paging are used), optionall
   * pages - Number of pages to transform. Defaults to null which means all.
   * view - The name of the view. Defaults to '_all_docs' which means all documents in the database will be used.
 * onSuccess - Function. Will get an object with below properties as argument.
-    * data - Array of documents.
-    * processedDocuments - Number of processed documents.
-    * processedPages - Number of processed pages.
+  * data - Array of documents.
+  * processedDocuments - Number of processed documents.
+  * processedPages - Number of processed pages.
 * onError - Function. Will get an error message as argument.
 
 ```js
@@ -142,7 +142,7 @@ _couchDb.viewTraverser(options, onSuccess, onError);
 ### Bulk Api
 
 #### Bulk create documents
-* records - Array<Object>. Array of data objects to create documents for.
+* records - Array&lt;Object&gt;. Array of data objects to create documents for.
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
@@ -153,7 +153,7 @@ _couchDb.bulk.post(records, onSuccess, onError);
 #### Bulk update documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
 
-* documents - Array<Object>. Array of documents to update.
+* documents - Array&lt;Object&gt;. Array of documents to update.
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
@@ -164,7 +164,7 @@ _couchDb.bulk.put(documents, onSuccess, onError);
 #### Bulk delete documents
 Here each document in the array is expected to have the CouchDb internal properties _id & _rev. This can be be achieved by first fetching the document using `_couchDb.get()`, making the updates to that document and then passing it to this function.
 
-* documents - Array<Object>. Array of documents to delete.
+* documents - Array&lt;Object&gt;. Array of documents to delete.
 * onSuccess - Function. Will get an array of status objects, an array of successfule status objects and an array of failed status objects as arguments.
 * onError - Function. Will get an error message as argument.
 
