@@ -1,16 +1,18 @@
 module.exports = function () {
 	var _self = global !== this ? this : {};
 
-	_self.map = function (viewResponse, hideInternalIds) {
+	_self.map = function (viewResponse, removeInternalProperties) {
 		var response = [];
-		hideInternalIds = hideInternalIds || false;
+        removeInternalProperties = removeInternalProperties || false;
+
+		'rows' in viewResponse && (viewResponse = viewResponse.rows);
 
 		for (var row in viewResponse) {
 			if (!viewResponse.hasOwnProperty(row)) continue;
 
-			var value = viewResponse[row].value;
+			var value = viewResponse[row].doc || viewResponse[row].value;
 
-			if (hideInternalIds) {
+			if (removeInternalProperties) {
 				delete value._id;
 				delete value._rev;
 			}

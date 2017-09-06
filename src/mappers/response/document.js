@@ -1,10 +1,10 @@
 module.exports = function () {
 	var _self = global !== this ? this : {};
 
-	_self.map = function (document, hideInternalIds) {
-		hideInternalIds = hideInternalIds || false;
+	_self.map = function (document, removeInternalProperties) {
+		removeInternalProperties = removeInternalProperties || false;
 
-		if (hideInternalIds) {
+		if (removeInternalProperties) {
 			delete document._id;
 			delete document._rev;
 		}

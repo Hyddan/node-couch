@@ -30,9 +30,18 @@ module.exports = function (grunt) {
                     src: ['**/*']
                 }]
             }
+        },
+        jasmine_nodejs: {
+            nodeCouch: {
+                specs: [
+                    'test/specs/**/*.js',
+                    '!test/specs/**/*-partial.js'
+                ]
+            }
         }
     });
 
     grunt.registerTask('compile', ['clean:lib', 'copy:src']);
-    grunt.registerTask('default', ['compile']);
+    grunt.registerTask('test', ['jasmine_nodejs']);
+    grunt.registerTask('default', ['compile', 'test']);
 };

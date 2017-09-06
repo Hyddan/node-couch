@@ -1,10 +1,11 @@
 {
   "name": "node-couch",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "CouchDb library for Node.Js",
   "scripts": {
     "compile": "grunt compile",
-    "prepublish": "npm run compile"
+    "prepublish": "npm run compile && npm run test",
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -22,12 +23,12 @@
     "url": "https://github.com/Hyddan/node-couch/issues"
   },
   "homepage": "https://github.com/Hyddan/node-couch#readme",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
   "devDependencies": {
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "^1.0.0",
-    "load-grunt-tasks": "^3.5.0"
+    "grunt-jasmine-nodejs": "^1.6.0",
+    "jasmine-core": "^2.8.0",
+    "load-grunt-tasks": "^3.5.0",
+    "mockery": "^2.1.0"
   }
 }
