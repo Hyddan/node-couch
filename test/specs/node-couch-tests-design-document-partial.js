@@ -125,7 +125,7 @@ module.exports = describe('When testing the design document api', function () {
                 language: 'javascript',
                 views: {
                     ById: {
-                        map: function () {}
+                        map: function () {}.toString()
                     }
                 }
             },

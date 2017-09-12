@@ -69,6 +69,19 @@ module.exports = (function () {
 		return 'object' === typeof (arg) && null !== arg;
 	};
 
+	_self.parseFunction = function (funcString) {
+        var body = funcString.substring(funcString.indexOf('{'), 1 + funcString.lastIndexOf('}')),
+                declaration = funcString.substring(0, funcString.indexOf('{')),
+                args = declaration.substring(1 + declaration.indexOf('('), declaration.lastIndexOf(')')).split(','),
+                func = _self.extend(function () {
+                    return Function('return function (' + args.join(',') + ') ' + body);
+                }, {
+                    prototype: Function.prototype
+                });
+
+        return (new func())();
+    };
+
 	_self.stringFormat = function (pattern) {
         if (!pattern) {
             return null;
