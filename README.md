@@ -665,6 +665,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2017-09-13   v2.2.1   Minor bugfix.
  * 2017-09-12   v2.2.0   Deserialize functions when getting design documents.
  * 2017-09-06   v2.1.0   Serialize functions when creating or updating design documents.
  * 2017-09-06   v2.0.0   2.0.0 Rewrite.

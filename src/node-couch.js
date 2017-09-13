@@ -18,7 +18,7 @@ module.exports = function () {
 			_createHttpClient = function (path, method, callback) {
                 callback = callback || function () {};
 
-                if (!_configuration.database && '_session' !== relativePath) {
+                if (!_configuration.database && (0 !== path.indexOf('/') || 0 !== path.indexOf('/_'))) {
                     callback({
                         message: 'No database selected!'
                     });
