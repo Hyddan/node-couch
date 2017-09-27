@@ -523,7 +523,7 @@ _**Parameters:**_
   * _**Callback parameters:**_
     * error - Object. Populated if an error occurred, otherwise `null`.
     * response - Object. Populated if successful, otherwise `undefined`.
-      * response - Array\<Object\>. Array of documents.
+      * response - Array\<Object\>. Array of documents. Populated if the transformation action does not return a transformation.
       * processedDocuments - Number. Number of processed documents.
       * processedPages - Number. Number of processed pages.
 
@@ -546,7 +546,7 @@ _**Parameters:**_
   * _**Callback parameters:**_
     * error - Object. Populated if an error occurred, otherwise `null`.
     * response - Object. Populated if successful, otherwise `undefined`.
-      * response - Array\<Object\>. Array of documents.
+      * response - Array\<Object\>. Array of documents. Populated if the transformation action does not return a transformation.
       * processedDocuments - Number. Number of processed documents.
       * processedPages - Number. Number of processed pages.
 
@@ -665,6 +665,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2017-09-27   v2.2.2   Updated documentation.
  * 2017-09-13   v2.2.1   Minor bugfix.
  * 2017-09-12   v2.2.0   Deserialize functions when getting design documents.
  * 2017-09-06   v2.1.0   Serialize functions when creating or updating design documents.

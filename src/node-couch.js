@@ -489,7 +489,6 @@ module.exports = function () {
                                                     });
                                                 });
                                             }
-
                                         })(options.action(data.rows[j].doc), data.rows[j].doc);
                                     }
                                     else {
@@ -498,6 +497,7 @@ module.exports = function () {
 
                                     ++metaData.processedDocuments;
                                 }
+
                                 ++metaData.processedPages;
 
                                 if ((null !== options.pages ? metaData.processedPages < options.pages : true) && options.limit < data.rows.length) {
