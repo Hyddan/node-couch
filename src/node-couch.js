@@ -34,7 +34,8 @@ module.exports = function () {
 											? 'Basic ' + (new Buffer(_configuration.credentials.userName + ':' + _configuration.credentials.password)).toString('base64')
 											: null,
 						'Content-Type': 'application/json'
-					}
+					},
+                    timeout: 'number' === typeof (_configuration.timeout) ? _configuration.timeout : 30000
 				}, function (response) {
 					if (399 < response.statusCode) {
                         callback({
@@ -54,7 +55,29 @@ module.exports = function () {
                             callback(null, JSON.parse(responseData || '{}'));
 						});
 					}
-				}).on('error', callback);
+				}).on('timeout', function () {
+                    this.abort();
+                }).on('error', function (error) {
+                    if (this.aborted) {
+                        callback({
+                            message: _utils.stringFormat('{method} to {path} timed out!', {
+                                method: method,
+                                path: path
+                            }),
+                            error: error
+                        });
+
+                        return;
+                    }
+
+                    callback({
+                        message: _utils.stringFormat('{method} to {path} failed!', {
+                            method: method,
+                            path: path
+                        }),
+                        error: error
+                    });
+                });
 			},
             _preparePath = function (relativePath, omitDatabase) {
                 if (!relativePath && omitDatabase) {
@@ -413,15 +436,15 @@ module.exports = function () {
                 return _self;
             },
             query: function (options, callback) {
-            callback = (callback || function () {}).bind(_self.View);
+                callback = (callback || function () {}).bind(_self.View);
 
-            0 !== options.designDocumentId.indexOf('_design/') && (options.designDocumentId = _utils.stringFormat('_design/{0}', options.designDocumentId));
+                options.designDocumentId && 0 !== options.designDocumentId.indexOf('_design/') && (options.designDocumentId = _utils.stringFormat('_design/{0}', options.designDocumentId));
 
-            _createHttpClient(_preparePath(_utils.stringFormat('{designDocumentId}/_view/{view}?{query}', options)), 'GET', callback)
-                .end();
+                _createHttpClient(_preparePath(_utils.stringFormat((options.designDocumentId ? '{designDocumentId}/_view/' : '') + '{view}?{query}', options)), 'GET', callback)
+                    .end();
 
-            return _self.View;
-        },
+                return _self.View;
+            },
             transform: function (options, action, callback) {
                 options.action = action;
 

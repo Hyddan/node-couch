@@ -22,6 +22,7 @@ var nodeCouch = require('node-couch'),
                 password: 'password'
             },
             database: 'node-couch',
+            timeout: 30000,
             url: {
                 hostName: 'localhost',
                 port: 5984
@@ -42,6 +43,7 @@ _**Parameters:**_
     * userName - String. User name to log in with.
     * password - String. Password to log in with.
   * database - String. Database name. Optional.
+  * timeout - Number. Request timeout in milliseconds. Optional. Defaults to 30000.
   * url - Object.
     * hostName - String. Ip/domain name to connect to.
     * port - Number. Port to connect to.
@@ -665,6 +667,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2017-10-12   v2.3.0   Added support for specifying request timeout.
  * 2017-09-27   v2.2.2   Updated documentation.
  * 2017-09-13   v2.2.1   Minor bugfix.
  * 2017-09-12   v2.2.0   Deserialize functions when getting design documents.
