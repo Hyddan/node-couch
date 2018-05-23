@@ -491,11 +491,40 @@ module.exports = function () {
                             }
 
                             if (null !== data && 'rows' in data) {
-                                for (var j = 0; Math.min(options.limit, data.rows.length) > j; j++) {
+                                var handledPageDocuments = 0,
+                                        pageDocuments = Math.min(options.limit, data.rows.length),
+                                        pageDocumentsHandled = function () {
+                                            handledPageDocuments = 0;
+
+                                            ++metaData.processedPages;
+
+                                            if ((null !== options.pages ? metaData.processedPages < options.pages : true) && options.limit < data.rows.length) {
+                                                metaData.startKey = data.rows[options.limit].key;
+                                                metaData.startKeyDocId = data.rows[options.limit].id;
+
+                                                nextPage(options, callback, metaData);
+                                            }
+                                            else {
+                                                callback(null, {
+                                                    response: _data,
+                                                    processedDocuments: metaData.processedDocuments,
+                                                    processedPages: metaData.processedPages
+                                                });
+                                            }
+                                        };
+                                for (var j = 0; pageDocuments > j; j++) {
+                                    ++metaData.processedDocuments;
+
                                     if ('function' === typeof (options.action)) {
                                         (function (result, doc) {
                                             if ('string' === typeof (result) && 'Delete' === result) {
-                                                _self.Document.delete(doc, function (error, data) {
+                                                _self.Document.delete(doc, function (error, response) {
+                                                    if (pageDocuments === ++handledPageDocuments) {
+                                                        pageDocumentsHandled();
+
+                                                        return;
+                                                    }
+
                                                     error && callback({
                                                         action: 'Delete',
                                                         error: error,
@@ -504,7 +533,13 @@ module.exports = function () {
                                                 });
                                             }
                                             else if (result) {
-                                                _self.Document.update(result, function (error, data) {
+                                                _self.Document.update(result, function (error, response) {
+                                                    if (pageDocuments === ++handledPageDocuments) {
+                                                        pageDocumentsHandled();
+
+                                                        return;
+                                                    }
+
                                                     error && callback({
                                                         action: 'Update',
                                                         error: error,
@@ -512,33 +547,25 @@ module.exports = function () {
                                                     });
                                                 });
                                             }
+                                            else {
+                                                ++handledPageDocuments;
+
+                                                pageDocuments === handledPageDocuments && pageDocumentsHandled();
+                                            }
                                         })(options.action(data.rows[j].doc), data.rows[j].doc);
                                     }
                                     else {
+                                        ++handledPageDocuments;
+
                                         _data.push(data.rows[j].doc);
+
+                                        pageDocuments === handledPageDocuments && pageDocumentsHandled();
                                     }
-
-                                    ++metaData.processedDocuments;
                                 }
 
-                                ++metaData.processedPages;
-
-                                if ((null !== options.pages ? metaData.processedPages < options.pages : true) && options.limit < data.rows.length) {
-                                    metaData.startKey = data.rows[options.limit].key;
-                                    metaData.startKeyDocId = data.rows[options.limit].id;
-
-                                    nextPage(options, callback, metaData);
-                                }
-                                else {
-                                    callback(null, {
-                                        response: _data,
-                                        processedDocuments: metaData.processedDocuments,
-                                        processedPages: metaData.processedPages
-                                    });
-                                }
+                                pageDocuments === handledPageDocuments && pageDocumentsHandled();
                             }
-                        })
-                            .end();
+                        }).end();
                     };
 
                 options = _utils.extend({

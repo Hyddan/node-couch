@@ -637,7 +637,7 @@ var nodeCouch = require('node-couch'),
              }
         });
 
-_couchDb.transformer({
+_couchDb.View.transform({
     designDocument: 'SomeType',
     view: 'BySomeId'
 }, function (document) {
@@ -667,6 +667,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2018-05-23   v2.4.0   Keep view traverser & transformer from proceeding to the next page until all document modifications have completed.
  * 2017-10-12   v2.3.0   Added support for specifying request timeout.
  * 2017-09-27   v2.2.2   Updated documentation.
  * 2017-09-13   v2.2.1   Minor bugfix.
