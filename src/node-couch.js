@@ -1,5 +1,5 @@
 module.exports = function () {
-	var _self = global !== this ? this : {},
+    var _self = global !== this ? this : {},
             _configuration = {
                 credentials: {
                     userName: null,
@@ -12,10 +12,10 @@ module.exports = function () {
                     protocol: null
                 }
             },
-			_http = require('http'),
-			_https = require('https'),
+            _http = require('http'),
+            _https = require('https'),
             _utils = require('./utils/utils'),
-			_createHttpClient = function (path, method, callback) {
+            _createHttpClient = function (path, method, callback) {
                 callback = callback || function () {};
 
                 if (!_configuration.database && (0 !== path.indexOf('/') || 0 !== path.indexOf('/_'))) {
@@ -24,20 +24,20 @@ module.exports = function () {
                     });
                 }
 
-				return ('https' === _configuration.url.protocol ? _https : _http).request({
-					hostname: _configuration.url.hostName,
-					port: _configuration.url.port,
-					path: path,
-					method: method,
-					headers: {
-						Authorization: ('object' === typeof (_configuration.credentials) && _configuration.credentials.userName && _configuration.credentials.password)
-											? 'Basic ' + (new Buffer(_configuration.credentials.userName + ':' + _configuration.credentials.password)).toString('base64')
-											: null,
-						'Content-Type': 'application/json'
-					},
+                return ('https' === _configuration.url.protocol ? _https : _http).request({
+                    hostname: _configuration.url.hostName,
+                    port: _configuration.url.port,
+                    path: path,
+                    method: method,
+                    headers: {
+                        Authorization: ('object' === typeof (_configuration.credentials) && _configuration.credentials.userName && _configuration.credentials.password)
+                                            ? 'Basic ' + (new Buffer(_configuration.credentials.userName + ':' + _configuration.credentials.password)).toString('base64')
+                                            : null,
+                        'Content-Type': 'application/json'
+                    },
                     timeout: 'number' === typeof (_configuration.timeout) ? _configuration.timeout : 30000
-				}, function (response) {
-					if (399 < response.statusCode) {
+                }, function (response) {
+                    if (399 < response.statusCode) {
                         callback({
                             message: _utils.stringFormat('{method} to {path} failed!', {
                                 method: method,
@@ -45,17 +45,17 @@ module.exports = function () {
                             }),
                             error: response
                         });
-					}
-					else {
-						var responseData = '';
-						response.on('data', function (_data) {
-							responseData += _data;
-						});
-						response.on('end', function () {
+                    }
+                    else {
+                        var responseData = '';
+                        response.on('data', function (_data) {
+                            responseData += _data;
+                        });
+                        response.on('end', function () {
                             callback(null, JSON.parse(responseData || '{}'));
-						});
-					}
-				}).on('timeout', function () {
+                        });
+                    }
+                }).on('timeout', function () {
                     this.abort();
                 }).on('error', function (error) {
                     if (this.aborted) {
@@ -78,7 +78,7 @@ module.exports = function () {
                         error: error
                     });
                 });
-			},
+            },
             _preparePath = function (relativePath, omitDatabase) {
                 if (!relativePath && omitDatabase) {
                     return '/';
@@ -172,7 +172,7 @@ module.exports = function () {
                 return designDocument;
             };
 
-	return _utils.extend(_self, {
+    return _utils.extend(_self, {
         configuration: function (configuration) {
             if (!configuration) {
                 return _configuration;
@@ -191,11 +191,11 @@ module.exports = function () {
 
             return _self;
         },
-		initialize: function (configuration) {
-			_utils.extend(_configuration, configuration);
+        initialize: function (configuration) {
+            _utils.extend(_configuration, configuration);
 
             return _self;
-		},
+        },
         Database: {
             create: function (callback) {
                 callback = (callback || function () {}).bind(_self.Database);
@@ -460,15 +460,15 @@ module.exports = function () {
                             for (var i in startKey) {
                                 if (!startKey.hasOwnProperty(i)) continue;
 
-                                _startKey += _utils.stringFormat('string' === typeof (startKey[i]) ? '"{0}",' : '{0},', startKey[i]);
+                                _startKey += _utils.stringFormat('string' === typeof (startKey[i]) ? '"{0}",' : '{0},', encodeURIComponent(startKey[i]));
                             }
                             _startKey = _startKey.replace(/,$/, '') + ']';
                         }
 
                         return (_utils.stringFormat('limit={limit}&startkey={startKey}&include_docs=true', {
                             limit: 1 + (limit || 100),
-                            startKey: _startKey || _utils.stringFormat('"{0}"', startKey || '')
-                        }) + (startKeyDocId ? _utils.stringFormat('&startkey_docid={0}', startKeyDocId) : '') + (key ? _utils.stringFormat('&key={0}', key) : ''));
+                            startKey: _startKey || _utils.stringFormat('"{0}"', encodeURIComponent(startKey || ''))
+                        }) + (startKeyDocId ? _utils.stringFormat('&startkey_docid={0}', encodeURIComponent(startKeyDocId)) : '') + (key ? _utils.stringFormat('&key={0}', key) : ''));
                     },
                     _data = [],
                     nextPage = function (options, callback, metaData) {
@@ -583,5 +583,5 @@ module.exports = function () {
                 return _self.View;
             }
         }
-	});
+    });
 };

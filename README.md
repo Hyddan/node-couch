@@ -667,6 +667,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2019-04-12   v2.5.0   UrlEncode keys used for paging.
  * 2018-09-21   v2.4.1   Corrected view examples in README.
  * 2018-05-23   v2.4.0   Keep view traverser & transformer from proceeding to the next page until all document modifications have completed.
  * 2017-10-12   v2.3.0   Added support for specifying request timeout.
